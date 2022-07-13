@@ -53,7 +53,7 @@ class Solution2:
 
     """
     def isPalindrome(self, x):
-        if x < 0 or x % 10 == 0:
+        if x < 0 or (x % 10 == 0 and x != 0):
             return False
         reversed_num = 0
         while x > reversed_num:
@@ -66,3 +66,4 @@ solution = Solution2()
 assert solution.isPalindrome(121) is True
 assert solution.isPalindrome(-121) is False
 assert solution.isPalindrome(10) is False
+assert solution.isPalindrome(0) is True
