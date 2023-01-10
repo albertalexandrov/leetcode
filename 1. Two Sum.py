@@ -22,15 +22,18 @@ Example 3:
 """
 
 
-class Solution:
-    """
-    Notes:
-        Временная сложность: О(n)
-        Пространственная сложность: O(n)
+class Solution1:
+    """Решение 1.
+
+    Time: О(n)
+    Space: O(n)
+
+    Предпочтительное решение благодаря скорости
 
     """
-    def twoSum(self, nums, target):
+    def two_sum(self, nums, target):
         lookups = {}  # содержит пары элемент-индекс
+
         for idx, num in enumerate(nums):
             if target - num in lookups:
                 return lookups[target - num], idx
@@ -38,4 +41,28 @@ class Solution:
                 lookups[num] = idx
 
 
-assert Solution().twoSum([2, 7, 11, 15], 9) == (0, 1)
+solution1 = Solution1()
+
+assert solution1.two_sum([2, 7, 11, 15], 9) == (0, 1)
+
+
+class Solution2:
+    """Решение 2.
+
+    Time: О(n^2)
+    Space: O(1)
+
+    Решение неоптимальное из-за скорости
+
+    """
+
+    def two_sum(self, nums, target):
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return i, j
+
+
+solution2 = Solution2()
+
+assert solution2.two_sum([2, 15, 11, 7], 9) == (0, 3)
