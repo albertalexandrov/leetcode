@@ -18,36 +18,42 @@ Example 2:
 """
 
 
-class Solution(object):
-    def productExceptSelf(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        n = len(nums)
-        result = [1 for _ in range(n)]
+class Solution1:
+    """Решение 1.
 
-        #         adding prefix to output
-        # [1, 1, 1, 1]
-        # [1, 2, 3, 4]
-        pre = 1
-        for i in range(n):
-            result[i] *= pre
-            pre *= nums[i]
-        print(result)
-        post = 1
-        for i in range(n - 1, -1, -1):
-            result[i] *= post
-            post *= nums[i]
+    Time: O(n)
+    Space: O(n)
 
-        print(result)
+    Подсмотрено
 
-        # как это работает не понятно ни хрена
+    Идея заключается в том, чтобы складывать произведение предыдущих чисел на позицию вперед
+    При этом конечно не забыть про произведение, которое заканчивается первым элементом
 
-        return result
+    """
+
+    def productExceptSelf(self, nums: list[int]) -> list[int]:
+        res = [1] * (len(nums))
+
+        # prefix хранит произведение предыдущих элементов при проходе направо
+        # и вставляется в текущую позицию
+        prefix = 1
+
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+
+        # postfix хранит произведение предыдущих элементов при проходе налево
+        # и вставляется в текущую позицию
+        postfix = 1
+
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+
+        return res
 
 
-s = Solution()
+s = Solution1()
 
 assert s.productExceptSelf([1, 2, 3, 4]) == [24, 12, 8, 6]
 assert s.productExceptSelf([-1, 1, 0, -3, 3]) == [0, 0, 9, 0, 0]
