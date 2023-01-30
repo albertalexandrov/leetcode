@@ -21,10 +21,11 @@ class Solution(object):
         :type b: str
         :rtype: str
         """
-        return bin(int(a, 2) + int(b, 2)).lstrip('0b')
+        return bin(int(a, 2) + int(b, 2)).replace('0b', '')
 
 
 solution = Solution()
 
 assert solution.addBinary('11', '1') == '100'
 assert solution.addBinary('1010', '1011') == '10101'
+assert solution.addBinary('0', '0') == '0'
