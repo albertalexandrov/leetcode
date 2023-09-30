@@ -41,18 +41,15 @@ class Solution(object):
         Space: O(1)
 
         """
-        digits[-1] += 1
 
         for i in range(len(digits) - 1, -1, -1):
-            quotient, remainder = divmod(digits[i], 10)
-            digits[i] = remainder
-
-            if i == 0 and quotient != 0:
-                digits.insert(0, quotient)
+            if digits[i] == 9:
+                digits[i] = 0
             else:
-                digits[i - 1] += quotient
+                digits[i] += 1
+                return digits
 
-        return digits
+        return [1] + digits
 
 
 solution = Solution()
